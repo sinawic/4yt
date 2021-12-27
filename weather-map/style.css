@@ -1,0 +1,16 @@
+#parent{
+    position: relative;
+    display: inline-block;
+    width: 780px;
+    height: 780px;
+}
+
+#grid{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: grid;
+    opacity: 0.5;
+}
