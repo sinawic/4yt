@@ -1,0 +1,6 @@
+version: '3'
+services:
+  node-proxy:
+    image: node-proxy:v1
+    ports:
+      - 3000:3000
