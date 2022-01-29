@@ -12,6 +12,6 @@ const preFetch = (req, res, next) => {
 }
 
 app.use('/', preFetch, createProxyMiddleware({
-  target: 'https://random-data-api.com/api/users/random_user?size=3', changeOrigin: true
+  target: 'https://random-data-api.com/api/users/random_user?size=5', changeOrigin: true
 }));
 app.listen(3000);

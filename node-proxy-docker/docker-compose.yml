@@ -2,5 +2,7 @@ version: '3'
 services:
   node-proxy:
     image: node-proxy:v1
+    volumes:
+      - "./app/index.js:/app/index.js"
     ports:
       - 3000:3000
