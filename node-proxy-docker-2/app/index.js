@@ -4,7 +4,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 const preFetch = (req, res, next) => {
-  console.log('request to instance 1')
+  console.log('request to instance 2')
   next()
 }
 
