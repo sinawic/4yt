@@ -31,3 +31,17 @@ plugins:
     credentials: true
     max_age: 3600
     preflight_continue: false
+
+- name: rate-limiting
+  config: 
+#    second: 5
+    hour: 10
+    policy: local
+    fault_tolerant: true
+    hide_client_headers: false
+    redis_ssl: false
+    redis_ssl_verify: false
+# comment these if you don't want to store rate limiting data in redis
+    policy: redis
+    redis_host: 172.27.59.36
+    redis_password: example
