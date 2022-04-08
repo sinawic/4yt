@@ -3,8 +3,31 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.23.56.138:6969
+  url: http://172.27.59.36:6969
   routes:
   - name: echo
     paths:
     - /echo
+
+plugins:
+- name: cors
+  config: 
+    origins:
+    - '*'
+    methods:
+    - GET
+    - POST
+    headers:
+    - Accept
+    - Accept-Version
+    - Content-Length
+    - Content-MD5
+    - Content-Type
+    - Date
+    - X-Auth-Token
+    - Authorization
+    exposed_headers:
+    - X-Auth-Token
+    credentials: true
+    max_age: 3600
+    preflight_continue: false
