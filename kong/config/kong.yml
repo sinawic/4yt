@@ -3,7 +3,7 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.27.59.36:6969
+  url: http://172.28.72.21:6969
   routes:
   - name: echo
     paths:
@@ -45,3 +45,10 @@ plugins:
     policy: redis
     redis_host: 172.27.59.36
     redis_password: example
+
+- name: ip-restriction
+  config: 
+    deny:
+    - 172.28.64.0/24
+    status: 401
+    message: cannot grant access
