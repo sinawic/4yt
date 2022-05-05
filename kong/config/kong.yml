@@ -3,13 +3,20 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.28.72.21:6969
+  url: http://192.168.63.100:6969
   routes:
   - name: echo
     paths:
     - /echo
 
 plugins:
+
+- name: bot-detection
+  config:
+    deny:
+#    - "(C|c)hrome"
+    - "curl"
+
 - name: cors
   config: 
     origins:
@@ -42,9 +49,9 @@ plugins:
     redis_ssl: false
     redis_ssl_verify: false
 # comment these if you don't want to store rate limiting data in redis
-    policy: redis
-    redis_host: 172.27.59.36
-    redis_password: example
+#    policy: redis
+#    redis_host: 172.27.59.36
+#    redis_password: example
 
 - name: ip-restriction
   config: 
