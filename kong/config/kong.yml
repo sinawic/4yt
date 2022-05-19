@@ -3,13 +3,49 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://192.168.63.100:6969
+  url: http://172.31.235.67:6969
   routes:
   - name: echo
     paths:
     - /echo
 
+consumers:
+- username: user
+
+basicauth_credentials:
+- consumer: user
+  username: Aladdin
+  password: OpenSesame
+
+keyauth_credentials:
+- consumer: user
+  key: abc
+
+acls:
+- consumer: user
+  group: group1
+
 plugins:
+
+- name: acl
+  config: 
+    allow:
+    - group1
+    hide_groups_header: true
+
+- name: basic-auth
+  config: 
+    hide_credentials: true
+
+- name: key-auth
+  config: 
+    key_names:
+    - apikey
+    key_in_body: false
+    key_in_header: true
+    key_in_query: true
+    hide_credentials: false
+    run_on_preflight: true
 
 - name: proxy-cache
   config: 
@@ -29,7 +65,7 @@ plugins:
   config:
     deny:
 #    - "(C|c)hrome"
-    - "curl"
+#    - "curl"
 
 - name: cors
   config: 
@@ -56,7 +92,7 @@ plugins:
 - name: rate-limiting
   config: 
 #    second: 5
-    hour: 10
+    hour: 100
     policy: local
     fault_tolerant: true
     hide_client_headers: false
