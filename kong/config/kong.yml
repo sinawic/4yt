@@ -3,7 +3,7 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.31.235.67:6969
+  url: http://172.17.140.35:6969
   routes:
   - name: echo
     paths:
@@ -26,6 +26,21 @@ acls:
   group: group1
 
 plugins:
+
+- name: request-size-limiting
+  config: 
+    allowed_payload_size: 1
+    size_unit: kilobytes
+    require_content_length: false
+
+- name: request-termination
+  config: 
+    status_code: 403
+#    message: So long and thanks for all the fish!
+    body: "{a:b}"
+    content_type: "application/json; charset=utf-8"
+    trigger: "q"
+  enabled: false
 
 - name: acl
   config: 
