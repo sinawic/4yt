@@ -1,0 +1,26 @@
+_format_version: "1.1"
+
+services:
+- host: example_upstream
+  name: example_service2
+#  port: 80
+  protocol: http
+  routes:
+  - name: test
+    paths:
+    - /test
+    strip_path: true
+
+upstreams:
+- name: example_upstream
+  targets:
+    - target: 172.29.242.56:6969
+      weight: 100
+    - target: 172.29.242.56:7070
+      weight: 100
+
+plugins:
+- name: rate-limiting
+  config:
+    minute: 50
+    policy: local
