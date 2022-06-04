@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text deteceter app</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body class="w-100">
+
+    <header>
+        <h1>Text app deteceter</h1>
+    </header>
+    <main class="d-flex">
+        <div class="d-flex col-xs-12 col-6 flex-column p-8">
+            <h3>Original text</h3>
+            <form id="form">
+                <textarea id="original-text" class="w-100 p-8" rows="30"></textarea>
+                <button>SUBMIT</button>
+            </form>
+            <span id="hint">please submit your original text</span>
+        </div>
+        <div class="col-xs-12 col-6 p-8">
+            <h3>Copied text</h3>
+            <div>
+                <pre id="result"></pre>
+                <div>
+                    <span id="percentage">0%</span> match
+                </div>
+                <button id="reset">RESET</button>
+            </div>
+        </div>
+    </main>
+    <div class="p-8">
+        <h4>Sample text</h4>
+        <pre>
+To complete a cloud migration and close a legacy data center, Modern Hire had to meet a financial customer’s needs for advanced security, including SSL offloading backed by a hardware security module (HSM), despite reliance on server software not supported by its cloud provider for HSM services.
+
+Learn how Modern Hire used the NGINX App Delivery solution to achieve rapid implementation, reduced complexity, and more granular insights.
+        </pre>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

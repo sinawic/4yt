@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: inline-block;
+    background: #cbcbcb;
+}
+
+pre {
+    font-size: large;
+    white-space: pre-wrap;
+}
+
+.text-success {
+    color: chartreuse;
+}
+
+.text-danger {
+    color: crimson;
+}
+
+.p-8 {
+    padding: 8px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .col-xs-12 {
+        width: 100%;
+    }
+}
