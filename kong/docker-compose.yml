@@ -5,6 +5,7 @@ services:
     image: kong
     volumes:
       - "./config:/usr/local/kong/declarative"
+      - "./logs/file.log:/file.log"
     environment:
       - KONG_DATABASE=off
       - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml

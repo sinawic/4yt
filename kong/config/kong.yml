@@ -27,6 +27,11 @@ acls:
 
 plugins:
 
+- name: file-log
+  config: 
+    path: /file.log
+    reopen: false
+
 - name: request-size-limiting
   config: 
     allowed_payload_size: 1
