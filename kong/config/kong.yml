@@ -3,7 +3,7 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.17.140.35:6969
+  url: http://172.24.61.101:6969
   routes:
   - name: echo
     paths:
@@ -47,10 +47,12 @@ plugins:
     allow:
     - group1
     hide_groups_header: true
+  enabled: false
 
 - name: basic-auth
   config: 
     hide_credentials: true
+  enabled: false
 
 - name: key-auth
   config: 
@@ -61,6 +63,7 @@ plugins:
     key_in_query: true
     hide_credentials: false
     run_on_preflight: true
+  enabled: false
 
 - name: proxy-cache
   config: 
@@ -75,15 +78,17 @@ plugins:
     - application/json; charset=utf-8
     cache_ttl: 300
     strategy: memory
+  enabled: false
 
 - name: bot-detection
   config:
     deny:
-#    - "(C|c)hrome"
-#    - "curl"
+    - "(C|c)hrome"
+    - "curl"
+  enabled: false
 
 - name: cors
-  config: 
+  config:
     origins:
     - '*'
     methods:
