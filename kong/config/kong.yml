@@ -3,7 +3,7 @@ _format_version: "2.1"
 services:
 
 - name: echo-server
-  url: http://172.24.61.101:6969
+  url: http://172.29.241.32:6969
   routes:
   - name: echo
     paths:
@@ -25,7 +25,17 @@ acls:
 - consumer: user
   group: group1
 
+# plugins section
 plugins:
+
+- name: http-log
+  config: 
+    http_endpoint: http://172.29.241.32:8080/
+    method: POST
+    timeout: 1000
+    keepalive: 1000
+    flush_timeout: 2
+    retry_count: 15
 
 - name: file-log
   config: 
