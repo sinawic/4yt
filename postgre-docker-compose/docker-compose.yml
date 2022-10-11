@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  postgres:
+    container_name: postgres
+    image: "postgres:13.0-alpine"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "ASDF@4121"
+      PGDATA: "/data/postgres"
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: "dpage/pgadmin4:4.24"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: ASDF@4121
+    volumes:
+      - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+    ports:
+      - "15433:80"
+    restart: unless-stopped
+    depends_on:
+      - postgres
