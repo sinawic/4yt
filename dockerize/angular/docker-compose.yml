@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  angular-app:
+    image: awesome-angular
+    ports:
+      - 4200:4200
+    volumes:
+      - ./angular:/project
+      - /project/node_modules
