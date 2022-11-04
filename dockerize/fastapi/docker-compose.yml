@@ -1,0 +1,8 @@
+version: '3.3'
+
+services:
+  fastapi_app:
+    image: awesome-fastapi
+    ports:
+      - 8000:8000
+    restart: always
