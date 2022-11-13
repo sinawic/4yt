@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-shell-exec-app",
+  "version": "1.0.0",
+  "description": "nodejs basic web app which is a portal for shell command execs",
+  "main": "api-exec.js",
+  "scripts": {
+    "start": "nodemon api-exec",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sinawic9@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
