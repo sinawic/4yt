@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:7
+    container_name: master
+    command: bash -c "redis-server --appendonly yes --requirepass password"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
