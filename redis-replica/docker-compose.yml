@@ -7,5 +7,24 @@ services:
     command: bash -c "redis-server --appendonly yes --requirepass password"
     ports:
       - "6379:6379"
+    networks:
+      - redis-replication
     volumes:
       - ./data:/data
+
+  redis-slave:
+    image: redis:7
+    container_name: slave
+    ports:
+      - "6380:6379"
+    command: redis-server /etc/redis.conf --replicaof master 6379
+    depends_on:
+      - redis
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    networks:
+      - redis-replication
+
+networks:
+  redis-replication:
+    driver: bridge
