@@ -1,0 +1,1 @@
+curl --header "Content-Type: application/json" --request POST --data '{"name":"name","country":"country"}'   http://localhost:3000/
