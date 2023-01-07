@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  vscode:
+    image: ruanbekker/vscode:python-3.7
+    container_name: vscode
+    ports:
+    - 8443:8443
+    - 8888:8888
+    volumes:
+    - ./data:/data
+    - ./code:/code
+    restart: always
+
+  awesome-react:
+    image: awesome-react
+    container_name: react
+    ports:
+      - 3000:3000
+    volumes:
+      - ./code:/app
+      - /app/node_modules
