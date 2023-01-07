@@ -1,0 +1,21 @@
+version: '3'
+services:
+  echo-server:
+    image: ealen/echo-server:latest
+    container_name: echo-server
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    ports:
+      - 8080:80
+    restart: always
+
+  nginx-proxy:
+    image: nginx:1.18.0
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/:ro
+      - ./certs:/etc/certs:ro
