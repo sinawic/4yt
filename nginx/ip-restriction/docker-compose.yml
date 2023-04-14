@@ -4,5 +4,6 @@ services:
     image: nginx:1.18.0
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "./ip-restriction.conf:/etc/nginx/ip-restriction.conf"
     ports:
       - 9999:9999
