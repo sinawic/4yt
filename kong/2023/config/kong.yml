@@ -1,0 +1,21 @@
+_format_version: "2.1"
+
+services:
+
+- name: echo-server
+  url: http://192.168.1.11:6969
+  routes:
+  - name: echo
+    paths:
+    - /echo
+
+# plugins section
+plugins:
+- name: correlation-id
+  config: 
+    header_name: Request-ID
+    generator: tracker
+    echo_downstream: false
+
+
+
