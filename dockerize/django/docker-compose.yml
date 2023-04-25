@@ -1,0 +1,7 @@
+version: '3.3'
+
+services:
+  django_web:
+    image: django_web:latest
+    ports:
+      - 8000:8000
