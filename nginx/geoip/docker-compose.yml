@@ -1,0 +1,18 @@
+# https://github.com/observabilitystack/geoip-api/tree/master/examples/nginx-geoip
+# https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
+# curl -sI -H "X-Geoip-Address: 185.123.1.2" "http://localhost:8081/"
+# curl -sI -H "X-Forwarded-For: 185.123.1.2" "http://localhost:9999/"
+
+version: '3'
+services:
+  nginx:
+    image: nginx:1.21-alpine
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    ports:
+      - 9999:9999
+
+  geoip:
+    image: ghcr.io/observabilitystack/geoip-api
+    ports:
+      - 8081:8080
