@@ -1,0 +1,11 @@
+# https://github.com/observabilitystack/geoip-api/tree/master/examples/nginx-geoip
+# https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
+# curl -sI -H "X-Geoip-Address: 185.123.1.2" "http://localhost:8081/"
+# curl localhost:8081/185.123.1.2
+
+version: '3'
+services:
+  geoip:
+    image: ghcr.io/observabilitystack/geoip-api
+    ports:
+      - 8081:8080
