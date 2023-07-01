@@ -1,5 +1,4 @@
-# Some random projects I wish to share as I see appropriate
-
+# Some random projects I wish to share as I find interesting
 <br><br>
 
 feel free to ask me questions and I will be glad to help.
