@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  minio:
+    image: minio/minio:RELEASE.2022-11-11T03-44-20Z
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./minio_storage:/data
+    command: server --console-address ":9001" /data
+    env_file: .env
+    restart: always
