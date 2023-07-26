@@ -1,0 +1,22 @@
+# documentation: https://github.com/koki-develop/clive#settings
+settings:
+  loginCommand: ["bash", "--login"]
+  fontSize: 22
+  defaultSpeed: 100
+  headless: true
+  skipPauseBeforeQuit: true
+  screenshotsDir: /home/sina-wic/4yt/clive
+
+# documentation: https://github.com/koki-develop/clive#actions
+actions:
+  #  - pause
+  - type: echo 'Welcome to cLive!'
+  - key: enter
+  - key: enter
+    count: 10 # Optional
+    speed: 100 # Optional
+  - type: touch hi
+  - key: enter
+  - type: echo 'haha' > hi
+  - key: enter
+  - screenshot: foobar.png
