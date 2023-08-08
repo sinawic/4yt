@@ -5,6 +5,8 @@ feel free to ask me questions and I will be glad to help.
 <br>
 <a href="https://www.linkedin.com/in/sinawic/">LINKEDIN</a>
 
+*any pull requests for any kind of improvements are openly appreciated*
+
 ## Star History
 
 <a href="https://star-history.com/#sinawic/4yt&Date">
