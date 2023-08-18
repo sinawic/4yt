@@ -1,0 +1,13 @@
+version: '2.1'
+services:
+  ftp:
+    image: delfer/alpine-ftp-server
+    network_mode: host
+#    ports:
+#      - 21:21
+#      - 21000-21010:21000-21010
+    environment:
+      - USERS=one|1234|/home/one|10000 two|1234|/home/two|10001
+    volumes:
+      - ./one:/home/one
+      - ./two:/home/two
