@@ -1,0 +1,14 @@
+version: '3'
+services:
+  echo_server:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./htpasswd:/htpasswd
+    ports:
+      - 9999:9999
