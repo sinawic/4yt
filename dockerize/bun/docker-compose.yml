@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  mybun:
+    image: mybun
+    ports:
+      - 8080:8080
+    env_file:
+      - ./app/.env
+    
