@@ -1,6 +1,8 @@
 # Some random projects I wish to share as I find interesting
 <br><br>
 
+## you can find all the relevant videos in the [youtube channel](https://www.youtube.com/channel/UC33nD8gkUUAJr36E9di1bDA)
+
 feel free to ask me questions and I will be glad to help.
 <br>
 <a href="https://www.linkedin.com/in/sinawic/">LINKEDIN</a>
