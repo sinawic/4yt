@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chat Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      border: 1px solid #ccc;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .username {
+      font-weight: bold;
+    }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .chat-input input[type="text"] {
+      flex-grow: 1;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+      <!-- <div class="message">
+        <span class="username">John:</span>
+        <span class="text">Hello everyone!</span>
+      </div> -->
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type your message..." id="message-input">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</body>
+
+<script>
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Get the value of the "username" parameter
+  const username = urlParams.get('username');
+
+  const socket = new WebSocket("ws://localhost:8080/chat?username=" + username);
+  socket.addEventListener("message", event => {
+    console.log(event.data);
+    appendMessage(event.data.split(":")[0], event.data.split(":")[1])
+  })
+
+  function appendMessage(user, message) {
+    // Create a new message element
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+
+    const usernameElement = document.createElement('span');
+    usernameElement.classList.add('username');
+    usernameElement.textContent = user;
+
+    const textElement = document.createElement('span');
+    textElement.classList.add('text');
+    if (message) textElement.textContent = ':' + message;
+
+    messageElement.appendChild(usernameElement);
+    messageElement.appendChild(textElement);
+
+    // Append the new message to the chat messages container
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.appendChild(messageElement);
+  }
+
+  function sendMessage() {
+    // Get the message input value
+    const messageInput = document.getElementById('message-input');
+    const message = messageInput.value;
+
+    appendMessage(username, message)
+    socket.send(message)
+
+    // Clear the message input field
+    messageInput.value = '';
+  }
+</script>
+
+</html>
