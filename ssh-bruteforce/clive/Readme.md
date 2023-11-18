@@ -1,5 +1,7 @@
 
 
+# disclaimer: this is for educational purposes only
+
 add the following line to `~/.ssh/config`
 ```
 Host *
