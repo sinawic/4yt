@@ -1,0 +1,22 @@
+settings:
+  loginCommand: ["bash", "--login"]
+  fontSize: 22
+  defaultSpeed: 10
+  headless: true
+  skipPauseBeforeQuit: true
+
+actions:
+  - type: echo 'Welcome to cLive!'
+  - key: enter
+  - type: echo "attempting ${USERNAME}:${PASSWORD}"
+  - key: enter
+  - type: ssh ${USERNAME}@${HOST} ls
+  - key: enter
+  - key: backspace
+    count: 32
+    speed: 100
+  - type: "${PASSWORD}"
+  - key: enter
+    speed: 1000
+  - type: if [ $? -eq 0 ]; then echo "${USERNAME}:${PASSWORD}@${HOST}" > hunted.txt; fi
+  - key: enter
