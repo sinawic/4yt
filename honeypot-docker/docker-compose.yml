@@ -1,0 +1,14 @@
+# https://github.com/cowrie/cowrie
+
+version: '3'
+services:
+  cowrie:
+    image: cowrie/cowrie
+    volumes:
+      - ./session-logs:/cowrie/cowrie-git/var/lib/cowrie/tty/
+      - ./user-files:/cowrie/cowrie-git/var/lib/cowrie/downloads/
+      - ./cowrie/cowrie.json:/cowrie/cowrie-git/var/log/cowrie/cowrie.json
+      - ./cowrie/cowrie.log:/cowrie/cowrie-git/var/log/cowrie/cowrie.log
+      - ./motd:/cowrie/cowrie-git/honeyfs/etc/motd
+    ports:
+      - 2222:2222
