@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    ports:
+      - 8000:80
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./apikeys.conf:/etc/nginx/apikeys.conf
+    ports:
+      - 9999:9999
