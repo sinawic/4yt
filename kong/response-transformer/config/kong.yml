@@ -1,0 +1,33 @@
+_format_version: "2.1"
+
+services:
+  - name: echo-server
+    url: http://backend
+    routes:
+      - name: echo
+        paths:
+          - /echo
+
+# plugins section
+plugins:
+  - name: response-transformer
+    config:
+#      remove:
+#        headers:
+#          - x-toremove
+#          - x-another-one
+#        json:
+#          - json-key-toremove
+#          - another-json-key
+      add:
+#        headers: ["h1:v2", "h2:v1"]
+        json:
+          - new-json-key:new_json
+          - another-json-key:123
+        json_types:
+          - string
+          - number
+      append:
+        headers:
+          - x-existing-header:append_existing_header
+          - x-another-header:append_another_header
