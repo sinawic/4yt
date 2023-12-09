@@ -1,0 +1,36 @@
+_format_version: "2.1"
+
+services:
+  - name: echo-server
+    url: http://192.168.43.253:6969
+    routes:
+      - name: echo
+        paths:
+          - /echo
+
+# plugins section
+plugins:
+  - name: response-transformer
+    config:
+      remove:
+        headers:
+          - x-toremove
+          - x-another-one
+        json:
+          - json-key-toremove
+          - another-json-key
+      add:
+        headers:
+          - x-new-header:value
+          - x-another-header:something
+        json:
+          - new-json-key:some_value
+          - another-json-key:some_value
+        json_types:
+          - string
+          - boolean
+          - number
+      append:
+        headers:
+          - x-existing-header:some_value
+          - x-another-header:some_value
