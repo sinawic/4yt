@@ -1,0 +1,19 @@
+# https://min.io/docs/minio/container/operations/install-deploy-manage/deploy-minio-single-node-multi-drive.html
+
+version: '3'
+
+services:
+  minio:
+    image: minio/minio:RELEASE.2023-06-29T05-12-28Z
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./data-1:/data-1
+      - ./data-2:/data-2
+      - ./data-3:/data-3
+      - ./.env:/etc/config.env
+    environment:
+      - MINIO_CONFIG_ENV_FILE=/etc/config.env
+    command: server --console-address ":9001"
+    restart: always
