@@ -3,9 +3,9 @@ const q = 'tasks'
 
 const main = async () => {
   const connection = amqp.connect([
-    'amqp://localhost:5672',
-    'amqp://localhost:5673',
-    'amqp://localhost:5674'
+    'amqp://user:password@localhost:5671',
+    'amqp://user:password@localhost:5672',
+    'amqp://user:password@localhost:5673'
   ])
 
   let channel = connection.createChannel({
