@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  openresty-proxy:
+    image: openresty/openresty:bullseye-fat
+    container_name: openresty-proxy
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      - TZ="Europe/Moscow"
+    volumes:
+      - ./conf.d-openresty:/etc/nginx/conf.d
+      - ./front:/var/www/front
+  nginx:
+    image: nginx:1.25.0
+    volumes:
+      - ./conf.d-nginx:/etc/nginx/conf.d
+      - ./front:/var/www/front
+    ports:
+      - 8000:80
