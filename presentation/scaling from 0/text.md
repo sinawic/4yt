@@ -77,3 +77,30 @@ In this stateless architecture, HTTP requests from users can be sent to any web 
 Also, adding and removing servers can be done based on traffic load as we removed the state data from our web servers.
 
 
+## slideX
+Our application can get users from multiple geographic locations. To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
+
+Let’s look at dealing with 2 geographic locations which use the concept of GeoDNS-routing:
+
+GeoDNS uses the IP address of the user from whom the DNS request is received, identifies the IP location, and serves a unique response according to the country or region of the user.
+
+Also, in the event of any significant data center outage, we direct all traffic to a healthy data center.
+
+
+## slideX
+Message queuing makes it possible for applications to communicate asynchronously, by sending messages to each other via a queue. A message queue provides temporary storage between the sender and the receiver so that the sender can keep operating without interruption when the destination program is busy or not connected. Asynchronous processing allows a task to call a service, and move on to the next task while the service processes the request at its own pace.
+
+With MQ, a producer can publish messages to the queue and move on to do some other tasks as consumer may or may not be available to consume and process it at that particular time. Our consumer once available can read messages from the queue and then process them.
+
+One good example will be an application that supports photo customization, including cropping, sharpening, blurring, etc. Those customization tasks take time to complete. Web servers publish photo processing jobs to the message queue. Photo processing workers pick up jobs from the message queue and asynchronously perform photo customization tasks.
+
+Here the producer and the consumer can be scaled independently. When the size of the queue becomes large, more workers are added to reduce the processing time. However, if the queue is empty most of the time, the number of workers can be reduced.
+
+
+## slideX
+harding is the practice of adding more servers
+
+Sharding separates large databases into smaller, more easily managed parts called shards. Each shard shares the same schema, though the actual data on each shard is unique to the shard.
+
+User data is allocated to a database server based on a particular sharding key. Anytime you access data, a hash function is used to find the corresponding shard.
+
