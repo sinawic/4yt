@@ -1,0 +1,9 @@
+_format_version: "2.1"
+
+services:
+  - name: echo-server
+    url: http://backend
+    routes:
+      - name: echo
+        paths:
+          - /echo
