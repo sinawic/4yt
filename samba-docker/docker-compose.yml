@@ -1,0 +1,54 @@
+version: '3'
+
+# docker-compose.yml example for https://github.com/ServerContainers/samba
+
+services:
+  samba:
+    build: .
+    image: ghcr.io/servercontainers/samba
+    restart: always
+    network_mode: host
+    environment:
+      MODEL: 'TimeCapsule'
+      AVAHI_NAME: StorageServer
+
+      SAMBA_CONF_LOG_LEVEL: 3
+
+      # uncomment to disable optional services
+      #WSDD2_DISABLE: 1
+      #AVAHI_DISABLE: 1
+      #NETBIOS_DISABLE: 1
+
+      GROUP_family: 1500
+
+      ACCOUNT_alice: alipass
+      UID_alice: 1000
+      GROUPS_alice: family
+
+      ACCOUNT_bob: bobpass
+      UID_bob: 1001
+      GROUPS_bob: family
+
+      SAMBA_VOLUME_CONFIG_shared_home: "[Home]; path=/shares/homes/%U; valid users = alice, bob; guest ok = no; read only = no; browseable = yes"
+
+      SAMBA_VOLUME_CONFIG_aliceonly: "[AliceShare]; path=/shares/alice; valid users = alice; guest ok = no; read only = no; browseable = yes"
+      SAMBA_VOLUME_CONFIG_alicehidden: "[AliceHiddenShare]; path=/shares/alice-hidden; valid users = alice; guest ok = no; read only = no; browseable = no"
+
+      SAMBA_VOLUME_CONFIG_bobonly: "[Bob Share]; path=/shares/bob; valid users = bob; guest ok = no; read only = no; browseable = yes"
+
+      SAMBA_VOLUME_CONFIG_public: "[Public]; path=/shares/public; valid users = alice, bob, foo; guest ok = no; read only = no; browseable = yes; force group = family"
+      SAMBA_VOLUME_CONFIG_public_ro: "[PublicReadOnly]; path=/shares/public; guest ok = yes; read only = yes; browseable = yes; force group = family"
+
+      SAMBA_VOLUME_CONFIG_guestmultilineexample: |
+        [Guest Share]
+         path = /shares/guest
+         guest ok = yes
+         browseable = yes
+
+    volumes:
+      - /etc/avahi/services/:/external/avahi
+      - ./shares/alice:/shares/alice
+      - ./shares/alice-hidden:/shares/alice-hidden
+      - ./shares/bob:/shares/bob
+      - ./shares/public:/shares/public
+      - ./shares/homes:/shares/homes
