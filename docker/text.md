@@ -55,6 +55,46 @@ The CLI uses Docker APIs to control or interact with the Docker daemon through s
 - https://docs.docker.com/engine/logging/
 - https://docs.docker.com/engine/manage-resources/pruning/
 
+### Storage
+By default all files created inside a container are stored on a writable container layer. This means that the data doesn't persist when that container no longer exists, and it can be difficult to get the data out of the container if another process needs it.
+
+Docker has two options for containers to store files on the host machine, so that the files are persisted even after the container stops: volumes, and bind mounts.
+No matter which type of mount you choose to use, the data looks the same from within the container. It is exposed as either a directory or an individual file in the container's filesystem.
+Volumes are stored in a part of the host filesystem which is managed by Docker (/var/lib/docker/volumes/ on Linux).
+Bind mounts may be stored anywhere on the host system. They may even be important system files or directories. Non-Docker processes on the Docker host or a Docker container can modify them at any time.
+Volumes are created and managed by Docker. You can create a volume explicitly using the docker volume create command, or Docker can create a volume during container or service creation.
+Bind mounts have limited functionality compared to volumes. When you use a bind mount, a file or directory on the host machine is mounted into a container. The file or directory is referenced by its full path on the host machine.
+
+### Networking
+Container networking refers to the ability for containers to connect to and communicate with each other, or to non-Docker workloads.
+Containers have networking enabled by default, and they can make outgoing connections. A container has no information about what kind of network it's attached to, or whether their peers are also Docker workloads or not. A container only sees a network interface with an IP address, a gateway, a routing table, DNS services, and other networking details.
+You can create custom, user-defined networks, and connect multiple containers to the same network. Once connected to a user-defined network, containers can communicate with each other using container IP addresses or container names.
+
+docker network create -d bridge my-net
+docker run --network=my-net -it --name=container3 busybox
+
+By default, when you create or run a container using docker create or docker run, containers on bridge networks don't expose any ports to the outside world. Use the --publish or -p flag to make a port available to services outside the bridge network. This creates a firewall rule in the host, mapping a container port to a port on the Docker host to the outside world.
+
+Containers use the same DNS servers as the host by default, but you can override this with `--dns`
+
+### Container Logs
+The `docker logs` command shows information logged by a running container.
+Unix and Linux commands typically open three I/O streams when they run, called `STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the command's input stream, which may include input from the keyboard or input from another command. `STDOUT` is usually a command's normal output, and `STDERR` is typically used to output error messages. By default, docker logs shows the command's `STDOUT` and `STDERR`.
+
+### Prune unused Docker objects
+Docker takes a conservative approach to cleaning up unused objects (often referred to as "garbage collection"), such as images, containers, volumes, and networks.
+These objects are generally not removed unless you explicitly ask Docker to do so. This can cause Docker to use extra disk space. For each type of object, Docker provides a `prune` command. In addition, you can use `docker system prune` to clean up multiple types of objects at once.
+
+The `docker image prune` command allows you to clean up unused images. By default, this command only cleans up dangling images. A dangling image is one that isn't tagged, and isn't referenced by any container.
+
+When you stop a container, it isn't automatically removed unless you started it with the `--rm` flag.
+To see all containers on the Docker host, including stopped containers, use `docker ps -a`.
+A stopped container's writable layers still take up disk space. To clean this up, you can use the `docker container prune` command.
+
+Volumes can be used by one or more containers, and take up space on the Docker host. Volumes are never removed automatically, because to do so could destroy data.
+
+Docker networks don't take up much disk space, but they do create `iptables` rules, bridge network devices, and routing table entries. To clean these things up, you can use `docker network prune` to clean up networks which aren't used by any containers.
+
 
 ## Docker Build overview
 Docker Build is one of Docker Engine's most used features. Whenever you are creating an image you are using Docker Build. Build is a key part of your software development life cycle allowing you to package and bundle your code and ship it anywhere.
