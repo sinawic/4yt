@@ -99,6 +99,18 @@ Docker networks don't take up much disk space, but they do create `iptables` rul
 ## Docker Build overview
 Docker Build is one of Docker Engine's most used features. Whenever you are creating an image you are using Docker Build. Build is a key part of your software development life cycle allowing you to package and bundle your code and ship it anywhere.
 
+Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.
+
+### Use multi-stage builds
+With multi-stage builds, you use multiple FROM statements in your Dockerfile. Each FROM instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
+
+### Docker build cache
+Understanding Docker's build cache helps you write better Dockerfiles that result in faster builds.
+
+Each instruction in this Dockerfile translates to a layer in your final image. You can think of image layers as a stack, with each layer adding more content on top of the layers that came before it.
+Whenever a layer changes, that layer will need to be re-built.
+
+
 - https://docs.docker.com/build/concepts/overview/
 - https://docs.docker.com/build/building/multi-stage/
 - https://docs.docker.com/build/cache/
