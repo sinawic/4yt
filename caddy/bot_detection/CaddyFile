@@ -1,0 +1,21 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+
+  @allowedBots {
+    header User-Agent *curl*
+    header User-Agent *Mozilla*
+  }
+
+  @forbidden {
+    not header User-Agent *Mozilla*
+    not header User-Agent *curl*
+  }
+
+  reverse_proxy @forbidden backend:80
+
+  respond @allowedBots "Access denied" 403
+
+}
