@@ -1,0 +1,42 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+    # Allow access to specified IP addresses on /allowed
+    @allowed_ips {
+        remote_ip 10.10.10.110
+        remote_ip 203.0.113.0/24
+    }
+
+    handle /allowed {
+        # Serve content for allowed IPs
+        handle @allowed_ips {
+            reverse_proxy backend:80
+        }
+
+        # Deny access for others
+        respond "Access denied on /allowed" 403
+    }
+
+    # Deny specified IP addresses on /denied
+    @denied_ips {
+        remote_ip 10.10.10.110
+        remote_ip 203.0.113.50
+    }
+
+    handle /denied {
+        # Deny access for specified IPs
+        handle @denied_ips {
+            respond "Access denied on /denied" 403
+        }
+
+        # Allow access for others
+        reverse_proxy backend:80
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}

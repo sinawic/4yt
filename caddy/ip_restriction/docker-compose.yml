@@ -1,0 +1,23 @@
+services:
+  backend:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    ports:
+      - 8000:80
+
+  caddy:
+    image: caddy:2.8.4
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config
+      - ./static:/static
