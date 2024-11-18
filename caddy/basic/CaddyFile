@@ -1,0 +1,18 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+  encode zstd gzip
+  templates
+  root * /static
+  file_server {
+    browse
+    hide secret
+  }
+
+  reverse_proxy /api/* backend:80
+
+#  respond "hello caddy"
+
+}
