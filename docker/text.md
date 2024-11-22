@@ -121,9 +121,11 @@ When you have your images downloaded or built them yourself based on your codeba
 
 By running containers you can map ports from within the container to the host network so for example you can access a defined port inside the container from the host IP address. you can define storage points say it be docker volumes or bind mounts from the host filesystem to inside the container.
 
+By default docker containers will be totally ephemeral, meaning no state will be persisted, and by removing the container all the state inside the container will be removed and won't be accessible again, until we create another container with the same image and try to maintain the desired state manually. this is why we build our custom images or use volumes to persist the state inside the containers.
+
 
 ## Docker Compose overview
-Docker Compose is a tool for defining and running multi-container applications. It is the key to unlocking a streamlined and efficient development and deployment experience.
+Docker Compose is a tool for defining and running multi-container applications.
 
 Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single, comprehensible YAML configuration file. Then, with a single command, you create and start all the services from your configuration file.
 
@@ -139,7 +141,7 @@ Compose works in all environments; production, staging, development, testing, as
 Using Docker Compose offers several benefits that streamline the development, deployment, and management of containerized applications:
 
 - Simplified control: Docker Compose allows you to define and manage multi-container applications in a single YAML file. This simplifies the complex task of orchestrating and coordinating various services, making it easier to manage and replicate your application environment.
-- Efficient collaboration: Docker Compose configuration files are easy to share, facilitating collaboration among developers, operations teams, and other stakeholders. This collaborative approach leads to smoother workflows, faster issue resolution, and increased overall efficiency.
+- Efficient collaboration: Docker Compose configuration files are easy to share, facilitating collaboration among developers, operations teams, and others. This collaborative approach leads to smoother workflows, faster issue resolution, and increased overall efficiency.
 - Rapid application development: Compose caches the configuration used to create a container. When you restart a service that has not changed, Compose re-uses the existing containers. Re-using containers means that you can make changes to your environment very quickly.
 - Portability across environments: Compose supports variables in the Compose file. You can use these variables to customize your composition for different environments, or different users.
 - Extensive community and support: Docker Compose benefits from a vibrant and active community, which means abundant resources, tutorials, and support. This community-driven ecosystem contributes to the continuous improvement of Docker Compose and helps users troubleshoot issues effectively.
