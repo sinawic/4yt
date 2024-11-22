@@ -1,0 +1,30 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+    handle {
+        # Load balancing for /api
+        reverse_proxy /api* {
+            to backend:80
+            to backend2:80
+
+            # Health check configuration
+            health_interval 10s             # Check every 10 seconds
+            health_timeout 5s               # Timeout for health check
+            health_uri /health              # Health check endpoint (modify as needed)
+            health_headers {
+                # Optional: Add headers if required for the health check
+                User-Agent "Caddy"
+            }
+
+            lb_policy round_robin
+        }
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
+
