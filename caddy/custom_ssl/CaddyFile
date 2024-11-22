@@ -1,0 +1,12 @@
+
+pc {
+    tls /certs/pc.crt /certs/pc.key
+
+    reverse_proxy backend:80
+}
+
+sinawic {
+    tls /certs/sinawic.crt /certs/sinawic.key
+
+    reverse_proxy backend2:80
+}
