@@ -6,6 +6,8 @@
 # https://bun.sh/docs/api/http
 # https://bun.sh/docs/runtime/env
 
+# https://bun.sh/docs/api/file-io
+
 # https://bun.sh/docs/api/websockets
 
 
@@ -24,4 +26,9 @@ docker run --rm -d -v $PWD/app:/home/bun/app -p 8080:8080 oven/bun:1.0 sleep 360
 docker build -t my bun .
 docker-compose up -d
 
+# 3) file i/o
+
+# 4) web socket
+
+# 5) nextjs bun
 
