@@ -1,0 +1,35 @@
+(logging) {
+    log {
+        # Customize log rolling:
+        output file /logs/api_{args.0}.log {
+            roll_size 1gb
+            roll_keep 5
+            roll_keep_for 720h
+        }
+        # Delete the User-Agent request header from the logs:
+        format filter {
+            request>headers>User-Agent delete
+        }
+        format append {
+            fields {
+                env docker
+            }
+        }
+        level {args.1}
+    }
+}
+
+{
+    auto_https off
+    import logging error ERROR
+}
+
+:80, :443 {
+
+    import logging access INFO
+
+    handle /api/* {
+        reverse_proxy backend:80
+    }
+
+}
