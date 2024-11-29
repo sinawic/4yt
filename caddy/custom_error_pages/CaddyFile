@@ -1,0 +1,29 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+    root * /html
+
+    handle_errors 404 {
+      rewrite * /404.html
+      file_server
+    }
+
+    handle_errors 5xx {
+      rewrite * /5xx.html
+      file_server
+    }
+
+    handle_errors {
+      respond "It's another error"
+    }
+
+    error /private* "Unauthorized" 403
+    error /hidden* "Not found" 404
+
+    handle /api/* {
+        reverse_proxy backend:80
+    }
+
+}
