@@ -1,0 +1,30 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+
+    handle /404 {
+        respond "Page not foundd" 404
+    }
+
+    handle /custom-header {
+        header X-Custom-Header "This is a custom header"
+        respond "Custom Header Response" 200
+    }
+
+    handle /json {
+        header Content-Type "application/json"
+        respond `{"message": "Hello, API!", "status": "success"}` 200
+    }
+
+    handle /html {
+        header Content-Type "text/html"
+        respond "<html><body><h1>Under Maintenance!</h1><p>This is a simple HTML response.</p></body></html>" 200
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
