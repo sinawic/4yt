@@ -1,0 +1,28 @@
+services:
+
+  redis:
+    image: redis:7.0
+    container_name: redis
+    command: bash -c "redis-server"
+
+  backend:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    ports:
+      - 8000:80
+
+  caddy:
+    image: caddy:2.8.4-cache
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config

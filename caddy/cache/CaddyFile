@@ -1,0 +1,31 @@
+{
+  auto_https off
+  cache {
+    allowed_http_verbs GET POST PATCH
+    stale 200s
+    ttl 20s
+  }
+}
+
+:80, :443 {
+
+    cache {
+        redis {
+            url redis:6379
+        }
+        key {
+            headers User-Agent ApiKey Authorization
+        }
+    }
+
+    # Handle requests to /api/*
+    handle /api/* {
+        
+        reverse_proxy backend:80
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
