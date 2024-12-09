@@ -6,6 +6,6 @@
 
 mkdir config data
 
-docker build -t caddy:2.8.4-ratelimit .
+docker build -t sinawic/caddy:2.8.4-ratelimit .
 
 curl -i http://localhost/api/

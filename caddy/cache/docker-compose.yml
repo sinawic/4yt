@@ -14,7 +14,7 @@ services:
       - 8000:80
 
   caddy:
-    image: caddy:2.8.4-cache
+    image: sinawic/caddy:2.8.4-cache
     container_name: caddy
     restart: unless-stopped
     environment:

@@ -5,6 +5,6 @@
 
 mkdir config data
 
-docker build -t caddy:2.8.4-cache .
+docker build -t sinawic/caddy:2.8.4-cache .
 
 curl -i http://localhost/api/
