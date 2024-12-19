@@ -1,0 +1,22 @@
+{
+  auto_https off
+  servers {
+    metrics
+  }
+}
+
+:80, :443 {
+
+    handle /metrics {
+        metrics /metrics
+    }
+
+    handle /api/* {
+        reverse_proxy backend:80
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}

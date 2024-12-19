@@ -1,0 +1,8 @@
+scrape_configs:
+# external nodes
+  - job_name: caddy
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - caddy

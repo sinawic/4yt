@@ -1,0 +1,49 @@
+services:
+  backend:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    ports:
+      - 8000:80
+
+  caddy:
+    image: caddy:2.8.4
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config
+
+  prometheus:
+    image: prom/prometheus:v3.0.0
+    command:
+      - --config.file=/prometheus.yml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=native-histograms
+    volumes:
+      - ./prometheus.yaml:/prometheus.yml
+      - ./volumes/promconfig:/etc/prometheus
+      - ./volumes/promdata:/prometheus
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:11.3.1
+    volumes:
+      - ./volumes/grafanadata:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
+    ports:
+      - "3000:3000"
+    restart: always
