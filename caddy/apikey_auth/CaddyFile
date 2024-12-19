@@ -1,0 +1,36 @@
+{
+  auto_https off
+}
+
+:80, :443 {
+
+    handle /api/* {
+        @apiAuth {
+            header Authorization "Bearer key1"
+            header Authorization "Bearer key2"
+        }
+
+        # Proxy authorized requests
+        reverse_proxy @apiAuth http://backend:80 {
+            header_up Host {http.reverse_proxy.upstream.hostport}
+        }
+
+        # Define a matcher for unauthorized access
+        @unauthorized {
+            not {
+                header Authorization "Bearer key1"
+                header Authorization "Bearer key2"
+            }
+        }
+
+        # Respond to unauthorized access
+        respond @unauthorized "Unauthorized" 401 {
+            close
+        }
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
