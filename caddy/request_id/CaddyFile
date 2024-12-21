@@ -1,0 +1,24 @@
+{
+  auto_https off
+  order request_id before header
+}
+
+:80, :443 {
+
+    request_id {
+      header 64
+    }
+
+    handle /api/* {
+        header x-request-id "{http.request_id.header}"
+        reverse_proxy backend:80 {
+          header_up x-request-id "{http.request_id.header}"
+        }
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
+
