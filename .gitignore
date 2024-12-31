@@ -2,3 +2,4 @@ node_modules/
 test.mp4
 mongo-backups/
 *.log
+data*/
