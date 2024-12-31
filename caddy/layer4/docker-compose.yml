@@ -1,0 +1,15 @@
+services:
+  caddy:
+    image: sinawic/caddy:2.8.4-l4
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+      - 1080:1080
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config

@@ -1,0 +1,19 @@
+{
+  layer4 {
+      0.0.0.0:1080 {
+        @ssh ssh
+        route @ssh {
+          proxy pc.com:22
+        }
+      }
+    }
+}
+
+:80, :443 {
+
+   # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+}
+
