@@ -1,0 +1,35 @@
+services:
+  backend:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    labels:
+      com.caddyserver.http.enable: true
+      com.caddyserver.http.upstream.port: 80
+      com.caddyserver.http.matchers.host: pc.com
+  backend2:
+    image: ealen/echo-server:latest
+    restart: always
+    environment:
+      - ENABLE__ENVIRONMENT=false
+    labels:
+      com.caddyserver.http.enable: true
+      com.caddyserver.http.upstream.port: 80
+      com.caddyserver.http.matchers.host: example.pc.com
+
+  caddy:
+    image: caddy:2.8.4-docker_upstreams
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+      - 1080:1080
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config
+      - /var/run/docker.sock:/var/run/docker.sock

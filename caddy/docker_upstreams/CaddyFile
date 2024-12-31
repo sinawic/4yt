@@ -1,0 +1,17 @@
+{
+  auto_https off
+}
+
+pc.com:80, pc.com:443 {
+
+    reverse_proxy {
+        dynamic docker
+    }
+}
+
+example.pc.com:80, example.pc.com:443 {
+
+    reverse_proxy {
+        dynamic docker
+    }
+}
