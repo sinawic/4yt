@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  express-app:
+    image: sinawic/echo_server:latest
+    container_name: sinawic-echo-server
+    ports:
+      - 8080:80
+    environment:
+      - NODE_ENV=production
+#    volumes:
+#      - .:/app
+#      - /app/node_modules
+    restart: unless-stopped
