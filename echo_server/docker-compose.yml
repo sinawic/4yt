@@ -1,9 +1,0 @@
-version: '3'
-services:
-  echo-server:
-    image: ealen/echo-server:latest
-    restart: always
-    environment:
-      - ENABLE__ENVIRONMENT=false
-    ports:
-      - 6969:80
