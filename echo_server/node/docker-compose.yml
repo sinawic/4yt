@@ -8,7 +8,4 @@ services:
       - 8080:80
     environment:
       - NODE_ENV=production
-#    volumes:
-#      - .:/app
-#      - /app/node_modules
     restart: unless-stopped

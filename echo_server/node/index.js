@@ -9,9 +9,9 @@ app.use(bodyParser.json())
 
 app.all('*', (req, res) => {
   const { ip, url, headers, body, query } = req
-//  console.dir({ hostname: os.hostname(), url, headers, body, query })
-  console.log(util.inspect({ ip, hostname: os.hostname(), url, headers, body, query }, { depth: null, colors: true }))
-  res.status(200).send({ ip, hostname: os.hostname(), url, headers, body, query })
+  console.log(util.inspect({ ip, hostname: os.hostname(), url, method: req.method, headers, body, query }, { depth: null, colors: true }))
+  // custom logic here
+  res.status(200).send({ ip, hostname: os.hostname(), url, method: req.method, headers, body, query })
 })
 
 app.listen(port, () => {
