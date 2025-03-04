@@ -1,18 +1,24 @@
 services:
   backend:
-    image: ealen/echo-server:latest
-    restart: always
+    image: sinawic/echo_server:latest
+    container_name: sinawic-echo-server
+    ports:
+      - 8080:80
     environment:
-      - ENABLE__ENVIRONMENT=false
+      - NODE_ENV=production
+    restart: unless-stopped
     labels:
       com.caddyserver.http.enable: true
       com.caddyserver.http.upstream.port: 80
       com.caddyserver.http.matchers.host: pc.com
   backend2:
-    image: ealen/echo-server:latest
-    restart: always
+    image: sinawic/echo_server:latest
+    container_name: sinawic-echo-server
+    ports:
+      - 8080:80
     environment:
-      - ENABLE__ENVIRONMENT=false
+      - NODE_ENV=production
+    restart: unless-stopped
     labels:
       com.caddyserver.http.enable: true
       com.caddyserver.http.upstream.port: 80

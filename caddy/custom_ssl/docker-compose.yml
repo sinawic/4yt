@@ -1,11 +1,12 @@
 services:
   backend:
-    image: ealen/echo-server:latest
-    restart: always
-    environment:
-      - ENABLE__ENVIRONMENT=false
+    image: sinawic/echo_server:latest
+    container_name: sinawic-echo-server
     ports:
-      - 8000:80
+      - 8080:80
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
 
   backend2:
     image: ealen/echo-server:latest
