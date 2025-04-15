@@ -1,0 +1,23 @@
+services:
+  backend:
+    image: sinawic/echo_server:latest
+    container_name: sinawic-echo-server
+    ports:
+      - 8080:80
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  caddy:
+    image: sinawic/caddy:2.8.4-replace_response
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./CaddyFile:/etc/caddy/Caddyfile
+      - ./data:/data
+      - ./config:/config

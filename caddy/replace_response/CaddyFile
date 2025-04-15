@@ -1,0 +1,23 @@
+{
+  auto_https off
+  order replace after encode
+}
+
+:80, :443 {
+
+    # Handle requests to /api/*
+    handle /api/* {
+        replace {
+          pc.com caddy.com
+          curl lruc
+        }
+        reverse_proxy backend:80
+    }
+
+    # Default response for all other requests
+    handle {
+        respond "Welcome to yourdomain.com" 200
+    }
+
+}
+
