@@ -1,9 +1,14 @@
+require("dotenv").config()
 const util = require('util')
 const os = require('os')
 const express = require('express')
 const app = express()
 const port = 80
 const bodyParser = require('body-parser')
+
+console.log("Detected Env Vars:")
+console.log(process.env)
+console.log("_________________")
 
 app.use(bodyParser.json())
 
