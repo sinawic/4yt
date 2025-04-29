@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  sshwifty:
+    image: niruix/sshwifty:latest
+    container_name: sshwifty
+    ports:
+      - 8182:8182
+    restart: always
+    environment:
+      - SSHWIFTY_SHAREDKEY=powefv0qwdhouafpth
+      - SSHWIFTY_PRESETS=[{"Title":"lab","Type":"SSH","Host":"lab:22","Meta":{"Encoding":"utf-8","User":"lab","Authentication":"Password","Fingerprint":"SHA256:6LfjwqEvd4ebkpgJC/dUytErPQW3bZL4eDySjqMw8IA"}}]
+      - SSHWIFTY_LISTENINTERFACE=0.0.0.0
+      - SSHWIFTY_TLSCERTIFICATEFILE=/certs/pc.com.crt
+      - SSHWIFTY_TLSCERTIFICATEKEYFILE=/certs/pc.com.key
+    volumes:
+      - ./certs:/certs
