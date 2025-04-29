@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  express-app:
+  echo-server:
     image: sinawic/echo_server:latest
     container_name: sinawic-echo-server
     ports:
