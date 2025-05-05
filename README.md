@@ -5,7 +5,7 @@
 
 feel free to ask me questions and I will be glad to help.
 <br>
-<a href="https://www.linkedin.com/in/sinawic/">LINKEDIN</a>
+<a href="https://sinawic.ir/">WEBSITE</a>
 
 *any pull requests for any kind of improvements are openly appreciated*
 
